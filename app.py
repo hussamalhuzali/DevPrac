@@ -23,5 +23,14 @@ def multiply():
     b = float(request.form['b'])
     return render_template('result.html', operation="Multiply", result=a * b)
 
+@app.route('/divide', methods=['POST'])
+def divide():
+    a = float(request.form['a'])
+    b = float(request.form['b'])
+    if b == 0:
+        return render_template('result.html', operation="Divide", result="Error: Division by zero")
+    result = a / b
+    return render_template('result.html', operation="Divide", result=result)
+
 if __name__ == '__main__':
     app.run(debug=True)
