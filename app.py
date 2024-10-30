@@ -27,10 +27,15 @@ def multiply():
 def divide():
     a = float(request.form['a'])
     b = float(request.form['b'])
-    if b == 0:
-        return render_template('result.html', operation="Divide", result="Error: Division by zero")
-    result = a / b
+    result = "Error: Division by zero" if b == 0 else a / b
     return render_template('result.html', operation="Divide", result=result)
+
+@app.route('/Modulus', methods=['POST'])
+def modulus():
+    a = float(request.form['a'])
+    b = float(request.form['b'])
+    result = a % b
+    return render_template('result.html', operation="Modulus", result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
