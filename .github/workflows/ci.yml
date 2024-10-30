@@ -1,0 +1,21 @@
+name: CI Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+      - name: Install Dependencies
+        run:
+          pip install -r requirements.txt
+          pip install behave
+          pip install beautifulsoup4
+      - name: Run BDD Tests
+        run: behave
