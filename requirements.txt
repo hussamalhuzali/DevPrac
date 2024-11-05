@@ -2,4 +2,3 @@ flask==2.3.2
 requests==2.31.0
 pandas==2.1.1
 numpy==1.26.0
-behave==1.2.6
