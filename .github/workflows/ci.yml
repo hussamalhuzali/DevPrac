@@ -1,6 +1,8 @@
 name: CI Pipeline
 
-on: [push, pull_request]
+'on':
+  - push
+  - pull_request
 
 jobs:
   build:
@@ -11,11 +13,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: 3.x
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
           pip install behave
           pip install beautifulsoup4
+      - name: Run Unit tests
+        run: |
+          python -m unittest discover -s tests
       - name: Run BDD Tests
         run: behave
