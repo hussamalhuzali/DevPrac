@@ -1,0 +1,20 @@
+name: Rollback Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CD Pipeline"]
+    types:
+      - completed
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    if: failure() # This ensures rollback only runs if the CD pipeline fails
+
+    steps:
+      # Stop and remove the Docker container if the deployment fails
+      - name: Rollback on Failure
+        run: |
+          docker stop $(docker ps -q --filter "ancestor=flask-calculator")
+          docker rm $(docker ps -a -q --filter "ancestor=flask-calculator")
