@@ -1,0 +1,14 @@
+name: Ansible automation
+
+on: [push, pull_request]
+
+jobs:
+    ansible:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up Ansible
+              run: sudo apt-get install ansible -y
+            - name: Run ansible Playbook
+              run: ansible-playbook -u inventory.ini flask_setup.yml
