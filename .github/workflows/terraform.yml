@@ -1,0 +1,20 @@
+name: Terraform Automation
+
+on: [push, pull_request]
+
+jobs:
+    terraform:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            
+            - name: Set up terraform
+              run: sudo apt-get install -y terraform
+
+            - name: Initialize Terraform
+              run: terraform init
+
+            - name: Apply Terraform Configuration
+              run: terraform apply -auto-approve
+
